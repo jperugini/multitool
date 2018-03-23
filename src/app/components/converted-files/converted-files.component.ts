@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TypeScriptFile } from '../../definitions/typescript-file.definition';
-import { saveAs } from 'file-saver/dist/FileSaver';
+import { saveAs } from 'file-saver';
 import * as JSZip from 'jszip';
 
 @Component({
