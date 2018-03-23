@@ -1,0 +1,14 @@
+<ul class="nav nav-tabs nav-fill">
+	<li class="nav-item">
+		<a class="nav-link" [routerLink]="['swagger']" routerLinkActive="active active-underlined">Swagger</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" [routerLink]="['json']" routerLinkActive="active active-underlined">JSON</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" [routerLink]="['java']" routerLinkActive="active active-underlined">Java</a>
+	</li>
+</ul>
+<div class="content">
+	<router-outlet></router-outlet>
+</div>

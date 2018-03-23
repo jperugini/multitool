@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<!-- <a class="navbar-brand" href="#">Create TS Definition file</a> -->
+	<div class="navbar-brand" (click)="openMenu()" style="cursor: pointer">
+		<i class="fa fa-bars"></i>
+	</div>
+
+	<div class="navbar-brand title">
+		{{ currentToolbar?.title }}
+	</div>
+
+	<div class="ml-auto">
+		<ng-template #toolbar></ng-template>
+	</div>
+
+	<!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item">
+				<a class="nav-link" [routerLink]="['/code']" routerLinkActive="active">
+					Home
+					<span class="sr-only">(current)</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" [routerLink]="['/report']" routerLinkActive="active">Report</a>
+			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link disabled" href="">Disabled</a>
+			</li>
+		</ul>
+		<form class="form-inline my-2 my-lg-0">
+			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+		</form>
+	</div> -->
+</nav>
+
+<ngx-aside #NgxAsidePanelLeft
+			class="sidenav"
+           
+			(cancel)="onCancel()"
+			(submit)="onSave()"
+
+			[closeOnEscape]="true"
+			[showOverlay]="true"
+			[position]="'left'"
+
+			[showDefaultFooter]="false"
+			[showDefaultHeader]="false">
+
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+				<div class="navbar-brand">Menu</div>
+			</nav>
+			<nav class="nav flex-column">
+				<a class="nav-link" [routerLink]="['/code']" routerLinkActive="active" (click)="NgxAsidePanelLeft.hide()">Create TS file</a>
+				<a class="nav-link" [routerLink]="['/report']" routerLinkActive="active" (click)="NgxAsidePanelLeft.hide()">Weekly report generator</a>
+			</nav>
+        
+    
+        <footer>
+            <!-- My own footer, with custom buttons
+            <button (click)="NgxAsidePanelLeft.hide()">
+                Close
+            </button> -->
+        </footer>
+</ngx-aside>

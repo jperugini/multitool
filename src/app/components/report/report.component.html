@@ -1,0 +1,57 @@
+<div class="content">
+    <!-- <table class="table" *ngIf="issues">
+        <thead class="thead-light">
+            <tr>
+                <th>Project</th>
+                <th>Subject</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let issue of issues">
+                <td>{{ issue.project.name }}</td>
+                <td>{{ issue.subject }}</td>
+            </tr>
+        </tbody>
+    </table> -->
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">
+                <div class="d-flex justify-content-between">
+                    <div class="p-2">
+                        <img src="./assets/bred_small.png" class="bred-logo" alt="bred" />
+                    </div>
+                    <div class="p-2" style="text-align:center">
+                        <span class="report-title">
+                            <h5>Weekly Report</h5>
+                        </span>
+                    </div>
+                    <div class="p-2">
+                        <button class="btn btn-success" (click)="getRedmineIssues()" [disabled]="!apiKey" tooltip="You need redmine api key to generate the report">
+                            <i class="fa fa-cogs"></i> Generate from redmine
+                        </button>
+                        <button class="btn btn-primary" (click)="generateXls()">
+                            <i class="fa fa-download"></i> Export to XLS
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <p class="card-text">
+                <app-report-sub-header [subHeader]="reportSubHeader"></app-report-sub-header>
+            </p>
+            <!-- 
+            <md-card-content>
+                <app-report-sub-header [subHeader]="report.header"></app-report-sub-header>
+                <div class="spacer"></div>
+                <app-tasks-table [tasks]="report.tasks"></app-tasks-table>
+            </md-card-content> -->
+            <hot-table [data]="data"
+                    (after-change)="afterChange($event)"
+                    (after-on-cell-mouse-down)="afterOnCellMouseDown($event)"
+                    [colHeaders]="colHeaders"
+                    [columns]="columns"
+                    [options]="options"
+                    [colWidths]="colWidths">
+            </hot-table>
+        </div>
+    </div>
+</div>

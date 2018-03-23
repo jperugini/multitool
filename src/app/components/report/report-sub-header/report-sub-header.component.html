@@ -1,0 +1,58 @@
+<table class="table table-sm table-no-border">
+    <tr>
+        <td>Provider : </td>
+        <td>
+            <input type="text" [(ngModel)]="subHeader.provider">
+        </td>
+    </tr>
+    <tr>
+        <td>Drafter : </td>
+        <td>
+            <input type="text" [(ngModel)]="subHeader.drafter">
+        </td>
+    </tr>
+    <tr>
+        <td>Drafting date : </td>
+        <td>
+            <input type="text" [(ngModel)]="subHeader.draftingDate">
+        </td>
+    </tr>
+    <tr>
+        <td>Period : </td>
+        <td>
+            <input type="text" [(ngModel)]="subHeader.period">
+        </td>
+    </tr>
+    <tr>
+        <td>Week : </td>
+        <td>
+            <input type="text" [(ngModel)]="subHeader.week">
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td>Working days : </td>
+        <td>
+            <input type="text" [(ngModel)]="subHeader.working" [disabled]="true">
+        </td>
+        <td>Holidays : </td>
+        <td>
+            <input type="text" [(ngModel)]="subHeader.holidays" (change)="recalculateWorking()">
+        </td>
+        <td>Vacations : </td>
+        <td>
+            <input type="text" [(ngModel)]="subHeader.vacations" (change)="recalculateWorking()">
+        </td>
+        <td>Sick leave : </td>
+        <td>
+            <input type="text" [(ngModel)]="subHeader.sick" (change)="recalculateWorking()">
+        </td>
+    </tr>
+    <tr>
+        <td>Project Manager : </td>
+        <td>
+            <input type="text" [(ngModel)]="subHeader.projectManager">
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col">
+    <input type="text" class="form-control" placeholder="Redmine API Key" [(ngModel)]="apiKey" (ngModelChange)="setKey()">
+  </div>
+  <div class="col">
+    <button type="submit" class="btn btn-danger" (click)="deleteKey()">
+      <i class="fa fa-trash"></i>
+    </button>
+    <button type="submit" class="btn btn-info" (click)="storeKey()" [disabled]="keyStored">Store API Key</button>
+  </div>
+  <!-- <div class="col">
+    <button type="submit" class="btn btn-info" (click)="getReport()" [disabled]="!apiKey">
+      <i class="fa fa-cog"></i> Get Redmine</button>
+  </div> -->
+</div>
