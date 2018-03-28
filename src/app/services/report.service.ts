@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Subject } from 'rxjs/Subject';
+import { Report } from '../definitions/report.definition';
 
 @Injectable()
 export class ReportService {
@@ -34,6 +35,12 @@ export class ReportService {
 
   getApiKey(): Observable<string> {
     return this.apiKey.asObservable();
+  }
+
+  exportReport(report: Report): Observable<any> {
+    return this._http.post('api/export/', report, {
+      responseType: 'blob'
+    });
   }
 
 }

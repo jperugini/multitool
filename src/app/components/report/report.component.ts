@@ -7,6 +7,8 @@ import { ReportSubHeader } from '../../definitions/report-sub-header.definition'
 import { RedmineIssue } from '../../definitions/redmine-issue.definition';
 import { ReportRow } from '../../definitions/report-row.definition';
 import { Subscription } from 'rxjs/Subscription';
+import { Report } from '../../definitions/report.definition';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-report',
@@ -136,7 +138,8 @@ export class ReportComponent implements OnInit, OnDestroy {
             // Add line in spreadsheet
             this.data.push({
               project: project,
-              contributor: projectIssue.assigned_to.name + '\n' + projectIssue.author.name,
+              contributor: projectIssue.assigned_to.name !== projectIssue.author.name ?
+                  projectIssue.assigned_to.name + '\n' + projectIssue.author.name : projectIssue.assigned_to.name,
               tasks: projectIssue.subject,
               consumedPeriod: 0,
               planned: 0,
@@ -190,5 +193,32 @@ export class ReportComponent implements OnInit, OnDestroy {
     const day = d.getDay(),
       diff = d.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
     return new Date(d.setDate(diff));
+  }
+
+  exportReport(): void {
+    const reportToExport = new Report();
+    reportToExport.header = this.reportSubHeader;
+    reportToExport.tasks = this.data;
+    reportToExport.id = 1;
+
+    this._reportService.exportReport(reportToExport).subscribe(
+      res => this.downloadFile(res),
+      err => console.log(err)
+    );
+  }
+
+  downloadFile(data: Response): void {
+    // Filename
+    let name = '';
+    if (this.reportSubHeader.drafter.indexOf(' ') > -1) {
+      name = this.reportSubHeader.drafter.split(' ')[0].toLowerCase(); // get firstname
+      name = name.charAt(0).toUpperCase() + name.slice(1); // capitalize first letter
+      name = name + this.reportSubHeader.drafter.split(' ')[1].charAt(0);
+    }
+
+    const filename = 'Weekly Report - ' + this.reportSubHeader.provider + ' services - '
+                  + name + ' - week' + this.reportSubHeader.week.toString() + '.xlsx';
+    const blob = new Blob([data], { type: 'application/vnd.ms-excel' });
+    saveAs(blob, filename);
   }
 }

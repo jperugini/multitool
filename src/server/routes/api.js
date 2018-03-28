@@ -3,6 +3,7 @@ const router = express.Router();
 // declare axios for making http requests
 const axios = require('axios');
 const https = require('https');
+const exportWeekly = require('../services/export');
 
 const REDMINE_API = 'https://redmine.production.local';
 
@@ -30,6 +31,13 @@ router.get('/issues/:key', (req, res) => {
     } else {
         res.status(500).send('No api key');
     }
+});
+
+router.post('/export', (req, res) => {
+    exportWeekly(req.body,
+        filename => res.status(200).download('reports/' + filename),
+        err => res.status(500).send(err)
+    );
 });
 
 module.exports = router;
